@@ -1,10 +1,10 @@
 <!DOCTYPE html>
 <html lang="fr">
 <head>
-  <meta charset="UTF-8">
+  <meta charset="UTF-8" />
   <title>BYOLOGEE | Principes de base de la biologie</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link href="https://fonts.googleapis.com/css?family=Inter:400,600&display=swap" rel="stylesheet">
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <link href="https://fonts.googleapis.com/css?family=Inter:400,600&display=swap" rel="stylesheet" />
   <style>
     body {
       margin: 0;
@@ -15,18 +15,34 @@
       flex-direction: column;
       min-height: 100vh;
     }
+    /* Barre de navigation */
     nav {
       background: #101f33;
+      font-size: 1.1em;
       display: flex;
       justify-content: center;
+      padding: 0;
+      margin: 0;
+      user-select: none;
+    }
+    nav ul {
+      list-style: none;
+      margin: 0;
+      padding: 0;
+      display: flex;
       gap: 32px;
-      padding: 18px 0 14px 0;
-      font-size: 1.1em;
+    }
+    nav li {
+      position: relative;
+    }
+    nav > ul > li {
+      padding: 14px 16px;
     }
     nav a {
       color: #91bad6;
       text-decoration: none;
-      padding: 2px 8px;
+      padding: 8px 12px;
+      display: block;
       border-radius: 8px;
       transition: background 0.2s;
     }
@@ -34,6 +50,35 @@
       background: #1c385c;
       color: #6fb2ed;
     }
+    /* Menu déroulant */
+    nav li ul {
+      display: none;
+      position: absolute;
+      top: 100%;
+      left: 0;
+      background: #101f33;
+      border-radius: 0 0 8px 8px;
+      min-width: 220px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.5);
+      z-index: 1000;
+      padding: 0;
+    }
+    nav li:hover > ul {
+      display: block;
+    }
+    nav li ul li {
+      padding: 10px 18px;
+      white-space: nowrap;
+    }
+    nav li ul li a {
+      padding: 6px 10px;
+      font-size: 0.95em;
+    }
+    nav li ul li a:hover {
+      background: #28508d;
+      color: #acd6ff;
+    }
+    /* Container */
     .container {
       flex: 1;
       width: 94vw;
@@ -62,76 +107,33 @@
       margin-bottom: 14px;
       font-size: 1.3em;
     }
-    .principle-card {
-      background: rgba(255,255,255,0.06);
-      border-radius: 9px;
+    /* Carte interactive corp humain */
+    .human-body {
+      display: flex;
+      justify-content: center;
       margin-bottom: 20px;
-      padding: 15px 13px;
-      display: flex;
-      flex-direction: column;
-      gap: 7px;
     }
-    .principle-title {
-      font-size: 1.12em;
-      color: #86a3c3;
-      font-weight: 600;
+    svg {
+      width: 300px;
+      user-select: none;
     }
-    .principle-figure {
-      width: 58px;
-      height: 58px;
-      background: #0d1a2e;
-      border-radius: 50%;
-      display: flex;
-      align-items: center; justify-content: center;
-      margin-bottom: 7px;
-      font-size: 2.2em;
-      color: #6fb2ed;
-      box-shadow: 0 1px 7px rgba(19,36,59,0.13);
-    }
-    .principle-desc {
-      font-size: 1em;
-      color: #e8eaf6;
-    }
-    .btn {
-      display: inline-block;
-      background: #25406f;
-      color: #fff;
-      border: none;
-      border-radius: 5px;
-      padding: 7px 18px;
-      margin-top: 7px;
-      text-decoration: none;
-      font-size: 1em;
+    path {
+      fill: #3a5a77;
+      stroke: #1c385c;
+      stroke-width: 2;
       cursor: pointer;
-      transition: background 0.2s;
+      transition: fill 0.3s ease;
     }
-    .btn:hover {
-      background: #3569ad;
+    path:hover {
+      fill: #6fb2ed;
     }
-    .faq-list {
-      margin-top: 8px;
-      margin-bottom: 0;
-    }
-    .faq-item {
-      margin-bottom: 10px;
-      background: rgba(255,255,255,0.08);
-      border-radius: 7px;
-      padding: 9px 16px;
+    .info-box {
+      background: #101f33;
+      border-radius: 10px;
+      padding: 15px 20px;
+      min-height: 110px;
+      box-shadow: 0 0 10px rgba(111, 178, 237, 0.5);
       font-size: 1em;
-    }
-    .glossary {
-      margin-top: 8px;
-    }
-    .gloss-summary {
-      font-weight: 600;
-      color: #91bad6;
-      cursor: pointer;
-      margin-bottom: 5px;
-    }
-    .gloss-def {
-      color: #e8eaf6;
-      margin-left: 18px;
-      font-size: 0.98em;
     }
     footer {
       margin-top: 10px;
@@ -149,82 +151,150 @@
     }
     @media (max-width: 700px) {
       .container { max-width: 98vw; }
-      nav { font-size: 0.95em; gap: 17px; }
+      nav { font-size: 0.95em; }
       h1 { font-size: 1.35em;}
+      nav ul {
+        flex-direction: column;
+        gap: 0;
+      }
+      nav > ul > li {
+        padding: 10px;
+      }
+      nav li ul {
+        position: relative;
+        min-width: auto;
+        box-shadow: none;
+        border-radius: 0;
+      }
     }
   </style>
 </head>
 <body>
   <nav>
-    <a href="#about">À propos</a>
-    <a href="#principles">Principes de base</a>
-    <a href="#gallery">Galerie</a>
-    <a href="#faq">FAQ</a>
-    <a href="#contact">Contact</a>
+    <ul>
+      <li><a href="#principes-de-base">Principes de bases ▾</a>
+        <ul>
+          <li><a href="#cellule">La cellule</a></li>
+          <li><a href="#adn">ADN et gènes</a></li>
+          <li><a href="#transcription">Transcription</a></li>
+          <li><a href="#traduction">Traduction</a></li>
+          <li><a href="#proteines">Structure et fonction des protéines</a></li>
+        </ul>
+      </li>
+      <li><a href="#physiologie">Physiologie des systèmes</a></li>
+      <li><a href="#immunologie">Bases de l'immunologie ▾</a>
+        <ul>
+          <li><a href="#immunite-innee">Innée</a></li>
+          <li><a href="#immunite-adaptative">Adaptative</a></li>
+          <li><a href="#anticorps-structure">Structure de l'anticorps</a></li>
+          <li><a href="#immunoglobulines">Immunoglobulines</a></li>
+          <li><a href="#cytokines">Cytokines et communication cellulaire</a></li>
+          <li><a href="#complement">Le complément</a></li>
+          <li><a href="#tolerance">Tolérance immunitaire et régulation</a></li>
+          <li><a href="#neuroimmunite">Neuroimmunité</a></li>
+        </ul>
+      </li>
+      <li><a href="#immunite-pathologies">Immunité et pathologies ▾</a>
+        <ul>
+          <li><a href="#cancer">Cancer</a></li>
+          <li><a href="#vieillissement">Vieillissement immunitaire</a></li>
+          <li><a href="#choc-septique">Choc septique</a></li>
+          <li><a href="#allergies">Allergies</a></li>
+          <li><a href="#auto-immunes">Maladies auto-immunes</a></li>
+          <li><a href="#immunodeficiences">Immunodéficiences</a></li>
+        </ul>
+      </li>
+      <li><a href="#approches-therapeutiques">Approches thérapeutiques ▾</a>
+        <ul>
+          <li><a href="#vaccination">Vaccination</a></li>
+          <li><a href="#anticorps-monoclonaux">Anticorps monoclonaux</a></li>
+          <li><a href="#immunotherapies">Immunothérapies</a></li>
+          <li><a href="#therapies-geniques">Thérapies géniques</a></li>
+          <li><a href="#therapies-cellulaires">Thérapies cellulaires</a></li>
+          <li><a href="#therapies-arnm">Thérapies à base d'ARNm</a></li>
+          <li><a href="#transplantations">Transplantations et tolérance immunitaire</a></li>
+        </ul>
+      </li>
+      <li><a href="#chronoemotion">ChronoEmotion</a></li>
+    </ul>
   </nav>
+
   <div class="container">
-    <section id="about">
-      <h1>BYOLOGEE</h1>
-      <h2>À propos</h2>
+    <section id="accueil">
+      <h1>Bienvenue sur BYOLOGEE</h1>
       <p>
-        Passionné par la biologie, BYOLOGEE propose des explications claires et des figures pédagogiques sur les bases de la biologie moléculaire, génétique et cellulaire. Mission : rendre la science accessible, rigoureuse et moderne !
+        BYOLOGEE propose un partage clair et rigoureux des principes de base en biologie, physiologie, immunologie et autres sciences du vivant.
+        Découvrez ici des rubriques variées avec des explications pédagogiques, des timelines interactives, et un dictionnaire des émotions originales.
       </p>
-      <small>Par <span style="color:#6fb2ed">TonNom</span>, chercheur en biologie moléculaire.</small>
     </section>
-    <section id="principles">
+
+    <section id="principes-de-base">
       <h2>Principes de base</h2>
-      <div class="principle-card">
-        <div class="principle-figure">🧬</div>
-        <div class="principle-title">ADN et gènes</div>
-        <div class="principle-desc">Structure, rôle, mutations – L’essentiel pour comprendre la génétique moderne.</div>
-        <a class="btn" href="#">En savoir plus</a>
-      </div>
-      <div class="principle-card">
-        <div class="principle-figure">🦠</div>
-        <div class="principle-title">La cellule</div>
-        <div class="principle-desc">Organisation, fonctions, différences entre cellules animales et végétales.</div>
-        <a class="btn" href="#">En savoir plus</a>
-      </div>
-      <div class="principle-card">
-        <div class="principle-figure">💡</div>
-        <div class="principle-title">Protéines</div>
-        <div class="principle-desc">Synthèse, fonctions, exemples clés pour les mécanismes biologiques.</div>
-        <a class="btn" href="#">En savoir plus</a>
-      </div>
-      <!-- Ajoute d'autres cartes avec icones personnalisées -->
+      <section id="cellule"><h3>La cellule</h3><p>Description de la cellule...</p></section>
+      <section id="adn"><h3>ADN et gènes</h3><p>Description de l'ADN et des gènes...</p></section>
+      <section id="transcription"><h3>Transcription</h3><p>Description de la transcription...</p></section>
+      <section id="traduction"><h3>Traduction</h3><p>Description de la traduction...</p></section>
+      <section id="proteines"><h3>Structure et fonction des protéines</h3><p>Description des protéines...</p></section>
     </section>
-    <section id="gallery">
-      <h2>Galerie</h2>
-      <p>Quelques schémas impactants et figures pédagogiques.</p>
-      <!-- Insère ici des images/figures simples (SVG ou PNG épurés) -->
-    </section>
-    <section id="faq">
-      <h2>FAQ</h2>
-      <div class="faq-list">
-        <div class="faq-item"><strong>Qu’est-ce qu’un gène ?</strong> Un segment d’ADN codant pour une fonction ou protéine spécifique.</div>
-        <div class="faq-item"><strong>Qu’est-ce qu’une protéine ?</strong> Une molécule essentielle formée d’acides aminés, joue des rôles variés dans la cellule.</div>
-        <!-- Ajoute ici d’autres questions pédagogiques -->
+
+    <section id="physiologie">
+      <h2>Physiologie des systèmes</h2>
+      <p>Explorez le corps humain en cliquant sur les organes.</p>
+      <div class="human-body">
+        <svg viewBox="0 0 200 600" xmlns="http://www.w3.org/2000/svg" aria-labelledby="title" role="img">
+          <title>Corps humain</title>
+          <path id="cervelle" d="M90 40 Q110 20 130 40 Q150 80 110 100 Q70 80 90 40 Z" />
+          <path id="coeur" d="M90 200 Q110 180 130 200 Q130 240 90 240 Q50 240 50 200 Q70 180 90 200 Z" />
+          <path id="poumon-gauche" d="M50 130 Q70 110 90 130 Q90 170 50 170 Q40 150 50 130 Z" />
+          <path id="poumon-droit" d="M130 130 Q110 110 90 130 Q90 170 130 170 Q140 150 130 130 Z" />
+          <path id="foie" d="M70 270 Q110 260 150 270 Q160 300 110 320 Q70 300 70 270 Z" />
+          <path id="estomac" d="M90 330 Q120 310 140 350 Q130 380 90 370 Q50 360 90 330 Z" />
+        </svg>
+      </div>
+      <div class="info-box" id="info-box">
+        Cliquez sur un organe pour en savoir plus.
       </div>
     </section>
-    <section class="glossary">
-      <h2>Glossaire</h2>
-      <div>
-        <div class="gloss-summary" onclick="this.nextElementSibling.style.display=(this.nextElementSibling.style.display=='none')?'block':'none';">ADN</div>
-        <div class="gloss-def" style="display:none;">Acide désoxyribonucléique, support de l’information génétique.</div>
-        <div class="gloss-summary" onclick="this.nextElementSibling.style.display=(this.nextElementSibling.style.display=='none')?'block':'none';">Cellule</div>
-        <div class="gloss-def" style="display:none;">Unité structurale et fonctionnelle du vivant.</div>
-        <!-- Ajoute ici d’autres termes -->
-      </div>
+
+    <section id="immunologie">
+      <h2>Bases de l'immunologie</h2>
+      <section id="immunite-innee"><h3>Immunité innée</h3><p>Description...</p></section>
+      <section id="immunite-adaptative"><h3>Immunité adaptative</h3><p>Description...</p></section>
+      <section id="anticorps-structure"><h3>Structure de l'anticorps</h3><p>Description...</p></section>
+      <section id="immunoglobulines"><h3>Immunoglobulines</h3><p>Description...</p></section>
+      <section id="cytokines"><h3>Cytokines et communication cellulaire</h3><p>Description...</p></section>
+      <section id="complement"><h3>Le complément</h3><p>Description...</p></section>
+      <section id="tolerance"><h3>Tolérance immunitaire et régulation</h3><p>Description...</p></section>
+      <section id="neuroimmunite"><h3>Neuroimmunité</h3><p>Description...</p></section>
     </section>
-    <section id="contact">
-      <h2>Contact</h2>
-      <form>
-        <input style="width:220px;margin-bottom:8px;" type="email" placeholder="Email" required>
-        <button class="btn" type="submit">Envoyer</button>
-      </form>
-      <a href="/assets/BIOLOGETE_FICHE_BASES.pdf" class="btn">Télécharger la fiche synthèse</a>
+
+    <section id="immunite-pathologies">
+      <h2>Immunité et pathologies</h2>
+      <section id="cancer"><h3>Cancer</h3><p>Description...</p></section>
+      <section id="vieillissement"><h3>Vieillissement immunitaire</h3><p>Description...</p></section>
+      <section id="choc-septique"><h3>Choc septique</h3><p>Description...</p></section>
+      <section id="allergies"><h3>Allergies</h3><p>Description...</p></section>
+      <section id="auto-immunes"><h3>Maladies auto-immunes</h3><p>Description...</p></section>
+      <section id="immunodeficiences"><h3>Immunodéficiences</h3><p>Description...</p></section>
+    </section>
+
+    <section id="approches-therapeutiques">
+      <h2>Approches thérapeutiques</h2>
+      <section id="vaccination"><h3>Vaccination</h3><p>Description...</p></section>
+      <section id="anticorps-monoclonaux"><h3>Anticorps monoclonaux</h3><p>Description...</p></section>
+      <section id="immunotherapies"><h3>Immunothérapies</h3><p>Description...</p></section>
+      <section id="therapies-geniques"><h3>Thérapies géniques</h3><p>Description...</p></section>
+      <section id="therapies-cellulaires"><h3>Thérapies cellulaires</h3><p>Description...</p></section>
+      <section id="therapies-arnm"><h3>Thérapies à base d'ARNm</h3><p>Description...</p></section>
+      <section id="transplantations"><h3>Transplantations et tolérance immunitaire</h3><p>Description...</p></section>
+    </section>
+
+    <section id="chronoemotion">
+      <h2>ChronoEmotion</h2>
+      <p>Timeline interactive de la vie d'une personne avec les émotions expliquées scientifiquement, en lien avec un dictionnaire interactif des émotions.</p>
     </section>
   </div>
+
   <footer>
     <div>© 2025 BYOLOGEE – Tous droits réservés</div>
     <div class="socials">
@@ -232,5 +302,27 @@
       <a href="mailto:contact@byologee.fr">Contact pro</a>
     </div>
   </footer>
+
+  <script>
+    const infos = {
+      cervelle: "La cervelle (cerveau) est le centre de contrôle du corps, responsable des fonctions cognitives et motrices.",
+      coeur: "Le cœur pompe le sang à travers le système circulatoire pour fournir l'oxygène et les nutriments.",
+      "poumon-gauche": "Le poumon gauche est un organe respiratoire qui échange l'oxygène et le dioxyde de carbone.",
+      "poumon-droit": "Le poumon droit fonctionne avec le gauche pour permettre la respiration.",
+      foie: "Le foie joue un rôle central dans le métabolisme, la détoxification et la production de bile.",
+      estomac: "L'estomac est l'organe principal de la digestion où les aliments sont dégradés."
+    };
+
+    document.querySelectorAll("svg path").forEach(el => {
+      el.addEventListener("click", () => {
+        const organ = el.id;
+        const infoBox = document.getElementById("info-box");
+        infoBox.textContent = infos[organ] || "Information non disponible.";
+      });
+    });
+  </script>
+</body>
+</html>
+
 </body>
 </html>
