@@ -2,10 +2,235 @@
 <html lang="fr">
 <head>
   <meta charset="UTF-8">
-  <title>BYOLOGEE</title>
+  <title>BYOLOGEE | Principes de base de la biologie</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link href="https://fonts.googleapis.com/css?family=Inter:400,600&display=swap" rel="stylesheet">
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Inter', Arial, sans-serif;
+      background: #13243b;
+      color: #f9f9f9;
+      display: flex;
+      flex-direction: column;
+      min-height: 100vh;
+    }
+    nav {
+      background: #101f33;
+      display: flex;
+      justify-content: center;
+      gap: 32px;
+      padding: 18px 0 14px 0;
+      font-size: 1.1em;
+    }
+    nav a {
+      color: #91bad6;
+      text-decoration: none;
+      padding: 2px 8px;
+      border-radius: 8px;
+      transition: background 0.2s;
+    }
+    nav a:hover, nav a:focus {
+      background: #1c385c;
+      color: #6fb2ed;
+    }
+    .container {
+      flex: 1;
+      width: 94vw;
+      max-width: 950px;
+      margin: 0 auto;
+      padding: 38px 0 38px 0;
+    }
+    section {
+      margin-bottom: 38px;
+      background: rgba(255,255,255,0.02);
+      border-radius: 13px;
+      padding: 28px 22px;
+      box-shadow: 0 2px 12px rgba(19,36,59,0.05);
+    }
+    h1, h2, h3 {
+      color: #6fb2ed;
+      font-weight: 600;
+      margin-top: 0;
+    }
+    h1 {
+      font-size: 2.4em;
+      letter-spacing: 0.02em;
+      margin-bottom: 8px;
+    }
+    h2 {
+      margin-bottom: 14px;
+      font-size: 1.3em;
+    }
+    .principle-card {
+      background: rgba(255,255,255,0.06);
+      border-radius: 9px;
+      margin-bottom: 20px;
+      padding: 15px 13px;
+      display: flex;
+      flex-direction: column;
+      gap: 7px;
+    }
+    .principle-title {
+      font-size: 1.12em;
+      color: #86a3c3;
+      font-weight: 600;
+    }
+    .principle-figure {
+      width: 58px;
+      height: 58px;
+      background: #0d1a2e;
+      border-radius: 50%;
+      display: flex;
+      align-items: center; justify-content: center;
+      margin-bottom: 7px;
+      font-size: 2.2em;
+      color: #6fb2ed;
+      box-shadow: 0 1px 7px rgba(19,36,59,0.13);
+    }
+    .principle-desc {
+      font-size: 1em;
+      color: #e8eaf6;
+    }
+    .btn {
+      display: inline-block;
+      background: #25406f;
+      color: #fff;
+      border: none;
+      border-radius: 5px;
+      padding: 7px 18px;
+      margin-top: 7px;
+      text-decoration: none;
+      font-size: 1em;
+      cursor: pointer;
+      transition: background 0.2s;
+    }
+    .btn:hover {
+      background: #3569ad;
+    }
+    .faq-list {
+      margin-top: 8px;
+      margin-bottom: 0;
+    }
+    .faq-item {
+      margin-bottom: 10px;
+      background: rgba(255,255,255,0.08);
+      border-radius: 7px;
+      padding: 9px 16px;
+      font-size: 1em;
+    }
+    .glossary {
+      margin-top: 8px;
+    }
+    .gloss-summary {
+      font-weight: 600;
+      color: #91bad6;
+      cursor: pointer;
+      margin-bottom: 5px;
+    }
+    .gloss-def {
+      color: #e8eaf6;
+      margin-left: 18px;
+      font-size: 0.98em;
+    }
+    footer {
+      margin-top: 10px;
+      padding: 16px 6px 18px 6px;
+      background: #101f33;
+      text-align: center;
+      font-size: 1em;
+      color: #b2becd;
+    }
+    .socials a {
+      color: #679ace;
+      text-decoration: none;
+      margin-left: 7px;
+      font-size: 1.1em;
+    }
+    @media (max-width: 700px) {
+      .container { max-width: 98vw; }
+      nav { font-size: 0.95em; gap: 17px; }
+      h1 { font-size: 1.35em;}
+    }
+  </style>
 </head>
 <body>
-  <h1>Bienvenue sur BYOLOGEE !</h1>
-  <p>Site de partage de figures et explications en biologie.</p>
+  <nav>
+    <a href="#about">À propos</a>
+    <a href="#principles">Principes de base</a>
+    <a href="#gallery">Galerie</a>
+    <a href="#faq">FAQ</a>
+    <a href="#contact">Contact</a>
+  </nav>
+  <div class="container">
+    <section id="about">
+      <h1>BYOLOGEE</h1>
+      <h2>À propos</h2>
+      <p>
+        Passionné par la biologie, BYOLOGEE propose des explications claires et des figures pédagogiques sur les bases de la biologie moléculaire, génétique et cellulaire. Mission : rendre la science accessible, rigoureuse et moderne !
+      </p>
+      <small>Par <span style="color:#6fb2ed">TonNom</span>, chercheur en biologie moléculaire.</small>
+    </section>
+    <section id="principles">
+      <h2>Principes de base</h2>
+      <div class="principle-card">
+        <div class="principle-figure">🧬</div>
+        <div class="principle-title">ADN et gènes</div>
+        <div class="principle-desc">Structure, rôle, mutations – L’essentiel pour comprendre la génétique moderne.</div>
+        <a class="btn" href="#">En savoir plus</a>
+      </div>
+      <div class="principle-card">
+        <div class="principle-figure">🦠</div>
+        <div class="principle-title">La cellule</div>
+        <div class="principle-desc">Organisation, fonctions, différences entre cellules animales et végétales.</div>
+        <a class="btn" href="#">En savoir plus</a>
+      </div>
+      <div class="principle-card">
+        <div class="principle-figure">💡</div>
+        <div class="principle-title">Protéines</div>
+        <div class="principle-desc">Synthèse, fonctions, exemples clés pour les mécanismes biologiques.</div>
+        <a class="btn" href="#">En savoir plus</a>
+      </div>
+      <!-- Ajoute d'autres cartes avec icones personnalisées -->
+    </section>
+    <section id="gallery">
+      <h2>Galerie</h2>
+      <p>Quelques schémas impactants et figures pédagogiques.</p>
+      <!-- Insère ici des images/figures simples (SVG ou PNG épurés) -->
+    </section>
+    <section id="faq">
+      <h2>FAQ</h2>
+      <div class="faq-list">
+        <div class="faq-item"><strong>Qu’est-ce qu’un gène ?</strong> Un segment d’ADN codant pour une fonction ou protéine spécifique.</div>
+        <div class="faq-item"><strong>Qu’est-ce qu’une protéine ?</strong> Une molécule essentielle formée d’acides aminés, joue des rôles variés dans la cellule.</div>
+        <!-- Ajoute ici d’autres questions pédagogiques -->
+      </div>
+    </section>
+    <section class="glossary">
+      <h2>Glossaire</h2>
+      <div>
+        <div class="gloss-summary" onclick="this.nextElementSibling.style.display=(this.nextElementSibling.style.display=='none')?'block':'none';">ADN</div>
+        <div class="gloss-def" style="display:none;">Acide désoxyribonucléique, support de l’information génétique.</div>
+        <div class="gloss-summary" onclick="this.nextElementSibling.style.display=(this.nextElementSibling.style.display=='none')?'block':'none';">Cellule</div>
+        <div class="gloss-def" style="display:none;">Unité structurale et fonctionnelle du vivant.</div>
+        <!-- Ajoute ici d’autres termes -->
+      </div>
+    </section>
+    <section id="contact">
+      <h2>Contact</h2>
+      <form>
+        <input style="width:220px;margin-bottom:8px;" type="email" placeholder="Email" required>
+        <button class="btn" type="submit">Envoyer</button>
+      </form>
+      <a href="/assets/BIOLOGETE_FICHE_BASES.pdf" class="btn">Télécharger la fiche synthèse</a>
+    </section>
+  </div>
+  <footer>
+    <div>© 2025 BYOLOGEE – Tous droits réservés</div>
+    <div class="socials">
+      <a href="https://instagram.com/BYOLOGEE" target="_blank">Instagram</a>
+      <a href="mailto:contact@byologee.fr">Contact pro</a>
+    </div>
+  </footer>
 </body>
 </html>
