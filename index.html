@@ -303,32 +303,30 @@
     </section>
 
     <section id="physiologie">
-      <h2>Physiologie des systèmes</h2>
-      <p>Cliquez sur un organe dans la carte pour en savoir plus :</p>
-      <div class="human-body">
-        <svg viewBox="0 0 200 600" xmlns="http://www.w3.org/2000/svg" aria-labelledby="title" role="img">
-          <title>Corps humain</title>
-          <a href="cervelle.html">
-            <path id="cervelle" d="M90 40 Q110 20 130 40 Q150 80 110 100 Q70 80 90 40 Z" />
-          </a>
-          <a href="coeur.html">
-            <path id="coeur" d="M90 200 Q110 180 130 200 Q130 240 90 240 Q50 240 50 200 Q70 180 90 200 Z" />
-          </a>
-          <a href="poumon-gauche.html">
-            <path id="poumon-gauche" d="M50 130 Q70 110 90 130 Q90 170 50 170 Q40 150 50 130 Z" />
-          </a>
-          <a href="poumon-droit.html">
-            <path id="poumon-droit" d="M130 130 Q110 110 90 130 Q90 170 130 170 Q140 150 130 130 Z" />
-          </a>
-          <a href="foie.html">
-            <path id="foie" d="M70 270 Q110 260 150 270 Q160 300 110 320 Q70 300 70 270 Z" />
-          </a>
-          <a href="estomac.html">
-            <path id="estomac" d="M90 330 Q120 310 140 350 Q130 380 90 370 Q50 360 90 330 Z" />
-          </a>
-        </svg>
-      </div>
-    </section>
+  <h2>Physiologie des systèmes</h2>
+  <p>Clique sur un organe pour explorer le système correspondant.</p>
+  <div class="human-body" style="position:relative; max-width: 1100px;">
+    <img id="body-image" src="Organes_du_corps_humain.jpg" alt="Corps humain" usemap="#image-map" style="width: 100%; height: auto; display:block;">
+    <map name="image-map">
+      <area shape="rect" coords="433,629,209,766" alt="Kidney" title="Kidney" href="#" data-system="Urinary" data-icon="kidney.png">
+      <area shape="rect" coords="624,611,777,778" alt="Bladder" title="Bladder" href="#" data-system="Urinary" data-icon="bladder.png">
+      <area shape="rect" coords="805,581,1011,780" alt="Little Intestine" title="Little Intestine" href="#" data-system="Digestive" data-icon="intestine.png">
+      <area shape="rect" coords="821,562,1057,416" alt="Pancreas" title="Pancreas" href="#" data-system="Digestive" data-icon="pancreas.png">
+      <area shape="rect" coords="918,253,1031,399" alt="Spleen" title="Spleen" href="#" data-system="Immune" data-icon="spleen.png">
+      <area shape="rect" coords="678,294,894,93" alt="Stomach" title="Stomach" href="#" data-system="Digestive" data-icon="stomach.png">
+      <area shape="rect" coords="902,177,1114,22" alt="Brain" title="Brain" href="#" data-system="Nervous" data-icon="brain.png">
+      <area shape="rect" coords="2,14,264,314" alt="Lungs" title="Lungs" href="#" data-system="Respiratory" data-icon="lungs.png">
+      <area shape="rect" coords="271,2,398,194" alt="Heart" title="Heart" href="#" data-system="Cardiovascular" data-icon="heart.png">
+      <area shape="rect" coords="41,285,304,471" alt="Liver" title="Liver" href="#" data-system="Digestive" data-icon="liver.png">
+      <area shape="rect" coords="11,499,202,776" alt="Colon" title="Colon" href="#" data-system="Digestive" data-icon="colon.png">
+    </map>
+    <div id="organ-tooltip" style="display:none; position:absolute; background:#101f33; color:#fff; padding:15px 20px; border-radius:10px; box-shadow:0 0 10px rgba(111,178,237,0.5); min-width:220px; z-index:10;">
+      <div style="display:flex; align-items:center; gap:12px; font-weight:bold; font-size:1.1em;" id="tooltip-label"></div>
+      <button id="explore-btn" style="margin-top:10px; background:#25406f; color:#fff; border:none; border-radius:5px; padding:8px 18px; cursor:pointer;">Explorer le système</button>
+       </div>
+     </div>
+   </section>
+
 
     <section id="immunologie">
       <h2>Bases de l'immunologie</h2>
@@ -455,6 +453,40 @@
       });
     });
   </script>
+
+<script>
+  const tooltip = document.getElementById('organ-tooltip');
+  const tooltipLabel = document.getElementById('tooltip-label');
+  const exploreBtn = document.getElementById('explore-btn');
+  const bodyImage = document.getElementById('body-image');
+
+  document.querySelectorAll('area').forEach(area => {
+    area.addEventListener('mouseenter', (e) => {
+      const rect = bodyImage.getBoundingClientRect();
+      const coords = area.coords.split(',').map(n => parseInt(n));
+      // Calcul approximatif du centre de la zone
+      const centerX = (coords[0] + coords[2]) / 2;
+      const centerY = (coords[1] + coords[3]) / 2;
+
+      tooltip.style.left = (centerX * (bodyImage.width / rect.width)) + 'px';
+      tooltip.style.top = (centerY * (bodyImage.height / rect.height)) + 'px';
+
+      tooltipLabel.innerHTML = `<img src="${area.dataset.icon}" alt="${area.alt}" height="36" style="vertical-align:middle; margin-right:10px;"> ${area.title}`;
+      tooltip.style.display = 'block';
+
+      // Configure bouton
+      exploreBtn.onclick = function() {
+        alert(`Vous explorez le système ${area.dataset.system}.`);
+        // Ici tu peux rediriger ou afficher détails
+      };
+    });
+    area.addEventListener('mouseleave', () => {
+      tooltip.style.display = 'none';
+    });
+  });
+</script>
+
+  
 </body>
 
 </html>
